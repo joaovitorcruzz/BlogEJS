@@ -4,58 +4,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Editar Usuário</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body>
-    <% users.forEach(user => { %>
-        <div class="d-flex justify-content-center">
-            <div class="col-4 mt-5">
-                <h1 class="text-center">Editar um Usuario</h1>
-                <form action="/users/update" method="POST">
-                    <div class="form-group mb-3">
-                        <label for="exampleInputName" class="mb-2">Nome</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome" value="<%= user.name %>" required>
-                    </div>
+    <div class="d-flex justify-content-center">
+        <div class="col-4 mt-5">
+            <h1 class="text-center">Editar um Usuário</h1>
+            <form action="/users/update" method="POST">
+                <div class="form-group mb-3">
+                    <label for="name" class="mb-2">Nome</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome" value="<%= user.name %>" required>
+                </div>
 
-                    <div class="form-group mb-3">
-                        <label for="exampleInputEmail1" class="mb-2">Novo Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Digite o email" value="<%= user.email %>" required>
-                    </div>
+                <div class="form-group mb-3">
+                    <label for="email" class="mb-2">Novo Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Digite o email" value="<%= user.email %>" required>
+                </div>
 
-                    <div class="form-group mb-3">
-                        <label for="exampleInputPassword1" class="mb-2">Confirme a senha antiga</label>
-                        <input type="password" class="form-control" id="senha" name="senha"
-                            placeholder="Obrigado inseir para validar edições" required>
-                    </div>
+                <div class="form-group mb-3">
+                    <label for="senha" class="mb-2">Confirme a senha antiga</label>
+                    <input type="password" class="form-control" id="senha" name="senha"
+                        placeholder="Digite sua senha antiga para validar as edições" required>
+                </div>
 
-                    <div class="form-group mb-3">
-                        <label for="exampleInputConfirmPassword1" class="mb-2">Digite a nova ou deixe em branco</label>
-                        <input type="password" class="form-control" id="confirmsenha" name="confirmsenha"
-                            placeholder="Caso não queira mudar a senha, ignore" >
-                    </div>
+                <div class="form-group mb-3">
+                    <label for="confirmsenha" class="mb-2">Digite a nova senha ou deixe em branco</label>
+                    <input type="password" class="form-control" id="confirmsenha" name="confirmsenha"
+                        placeholder="Caso não queira mudar a senha, ignore">
+                </div>
 
-                    <label for="" class="mb-2">Novo Papel</label>
-                    <select class="form-select mb-3" aria-label="Default select example" id="papel" name="papel">
-                        <option value="1" selected>Usuário</option>
-                        <option value="2">Administrador</option>
+                <div class="form-group mb-3">
+                    <label for="papel" class="mb-2">Novo Papel</label>
+                    <select class="form-select" id="papel" name="papel">
+                        <option value="1" <%= user.papel == 1 ? 'selected' : '' %>>Usuário</option>
+                        <option value="2" <%= user.papel == 2 ? 'selected' : '' %>>Administrador</option>
                     </select>
-                    
-                    <% if (typeof errorMessage !== 'undefined') { %>
-                        <div style="color:red;" class="mb-2"><%= errorMessage %></div>
-                    <% } %>
+                </div>
 
-                    <div class="form-group mb-3 form-check">
-                        <input type="checkbox" class="form-a-input" id="ativo" name="ativo" <%= user.ativo ? 'checked' : '' %>>
-                        <label class="form-check-label" for="ativo">Ativo</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary col-12" value="<%= user.id %>" name="id" id="id">Cadastrar</button>
-                </form>
-            </div>
+                <% if (typeof errorMessage !== 'undefined') { %>
+                    <div class="alert alert-danger" role="alert"><%= errorMessage %></div>
+                <% } %>
+
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="ativo" name="ativo" <%= user.ativo ? 'checked' : '' %>>
+                    <label class="form-check-label" for="ativo">Ativo</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary col-12" value="<%= user.id %>" name="id" id="id">Salvar</button>
+            </form>
         </div>
-    <% }) %>
+    </div>
 </body>
 
 </html>
